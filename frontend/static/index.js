@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('fileName').textContent = file ? `✓ ${file.name}` : '';
     });
 
-    // --- MANEJO DEL FORMULARIO DE NASA KOI ---
+    // --- HOW TO USE THE NASA KOI FORM ---
     document.getElementById('formNASA').addEventListener('submit', async (e) => {
         e.preventDefault();
         const kepid = document.getElementById('keplerId').value;
@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- MANEJO DEL FORMULARIO DE ARCHIVO .FITS ---
+    // --- HANDLING THE .FITS FILE FORM ---
     document.getElementById('formOwnFile').addEventListener('submit', async (e) => {
         e.preventDefault();
         const fileInput = document.getElementById('fileInput');
 
         if (!fileInput.files.length) {
-            showError("Por favor, selecciona un archivo .fits.");
+            showError("Please select a .fits file.");
             return;
         }
 
@@ -91,14 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const probability = data.probability;
 
         let resultClass = 'result-uncertain';
-        let resultMessage = 'Resultado Inconclusivo';
+        let resultMessage = 'Inconclusive Result';
 
         if (probability >= 60) {
             resultClass = 'result-positive';
-            resultMessage = 'Alta Probabilidad de Exoplaneta';
+            resultMessage = 'High Probability of Exoplanet';
         } else if (probability < 40) {
             resultClass = 'result-negative';
-            resultMessage = 'Baja Probabilidad de Exoplaneta';
+            resultMessage = 'Low Probability of Exoplanet';
         }
 
         resultDiv.innerHTML = `
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div>${resultMessage}</div>
             </div>
             <div class="info-box">
-                <h3>Detalles del Análisis</h3>
+                <h3>Analysis Details</h3>
                 <p><strong>Fuente:</strong> ${data.source}</p>
                 <p><strong>Kepler ID:</strong> ${data.kepid}</p>
             </div>
@@ -132,15 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="probability-display" style="font-size: 2rem;">
                         ${res.probability}%
                     </div>
-                    <div>Periodo Encontrado: ${res.period} días</div>
+                    <div>Period Found: ${res.period} days</div>
                 </div>
             `;
         });
 
         resultDiv.innerHTML = `
             <div class="info-box" style="text-align: left; margin-bottom: 1.5rem;">
-                <h3>Análisis de ${data.source}</h3>
-                <p>Se encontraron ${data.results.length} señales de tránsito potenciales.</p>
+                <h3>Analysis of ${data.source}</h3>
+                <p>They were found ${data.results.length} potential traffic signs.</p>
             </div>
             ${resultsHTML}
         `;
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultDiv.style.display = 'block';
     }
 
-    // Iniciar con una opción por defecto
+    // Start with a default option
     selectOption('nasa');
     window.selectOption = selectOption;
 });
