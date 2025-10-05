@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="info-box">
                 <h3>Analysis Details</h3>
-                <p><strong>Fuente:</strong> ${data.source}</p>
+                <p><strong>Source:</strong> ${data.source}</p>
                 <p><strong>Kepler ID:</strong> ${data.kepid}</p>
             </div>
         `;
