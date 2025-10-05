@@ -10,11 +10,11 @@ import shutil
 
 app = Flask(__name__, template_folder='../frontend/templates',
     static_folder='../frontend/static')
-app.secret_key = 'a-una-hora-de-la-gloria'
+app.secret_key = 'we-will-win'
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# --- CARGA DE RECURSOS ---
+# --- RESOURCE LOADING ---
 try:
     model = joblib.load('exoplanet_detector_model.joblib')
     df_catalog = pd.read_csv('./data/cumulative_koi.csv', comment='#')
@@ -23,12 +23,12 @@ try:
     print("Modelo y catálogo de KOIs cargados.")
 except Exception as e:
     model, df_catalog = None, None
-    print(f"ERROR CRÍTICO AL INICIAR: {e}")
+    print(f"CRITICAL ERROR WHEN STARTING UP: {e}")
 
-# --- Constantes ---
+# --- CONSTANTS ---
 N_BINS = 201
 
-# --- MOTOR 1: PROCESAMIENTO SIMPLE Y FIABLE ---
+# --- ENGINE 1: SIMPLE AND RELIABLE PROCESSING ---
 def process_and_predict(lc, period, t0):
     lc_cleaned = lc.remove_outliers().normalize()
     folded_lc = lc_cleaned.fold(period=period, epoch_time=t0)
@@ -39,7 +39,7 @@ def process_and_predict(lc, period, t0):
     prediction_proba = model.predict_proba([flux_vector])[0]
     return float(prediction_proba[1] * 100)
 
-# --- MOTOR 2: DEMO-PROOF ---
+# --- ENGINE 2: DEMO-PROOF ---
 def hunt_and_predict(lc):
     lc_clean = lc.remove_nans().remove_outliers(sigma=5.0)
     cadence_days = np.median(np.diff(lc_clean.time.value))
@@ -70,20 +70,20 @@ def hunt_and_predict(lc):
             break
     return results
 
-# --- RUTAS DE LA APLICACIÓN ---
+# --- APPLICATION ROUTES ---
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/predict_koi', methods=['POST'])
 def predict_koi():
-    if model is None: return jsonify({'error': 'Modelo no disponible.'}), 500
+    if model is None: return jsonify({'error': 'Model not available.'}), 500
     data = request.get_json()
     kepid = data.get('kepid')
-    if not kepid or not kepid.isdigit(): return jsonify({'error': 'Kepler ID inválido.'}), 400
+    if not kepid or not kepid.isdigit(): return jsonify({'error': 'invalid Kepler ID.'}), 400
     try:
         search_result = lk.search_lightcurve(f'KIC {kepid}', author='Kepler')
-        if not search_result: return jsonify({'error': f'No se encontraron datos para KIC {kepid} en NASA.'}), 404
+        if not search_result: return jsonify({'error': f'No data was found for KIC {kepid} at NASA.'}), 404
         lc = search_result.download_all().stitch()
         if int(kepid) in df_catalog.index:
             koi_info = df_catalog.loc[int(kepid)]
@@ -92,16 +92,16 @@ def predict_koi():
             return jsonify({'probability': probability, 'kepid': kepid, 'source': 'NASA KOI Catalog'})
         else:
             results = hunt_and_predict(lc)
-            if not results: return jsonify({'error': 'No se encontraron señales de tránsito significativas.'}), 404
-            return jsonify({'results': results, 'source': f'Búsqueda a Ciegas (KIC {kepid})'})
+            if not results: return jsonify({'error': 'No significant traffic signs were found.'}), 404
+            return jsonify({'results': results, 'source': f'Blind Search (KIC {kepid})'})
     except Exception as e:
-        return jsonify({'error': f'Error fatal: {str(e)}'}), 500
+        return jsonify({'error': f'Fatal error: {str(e)}'}), 500
 
 @app.route('/predict_fits', methods=['POST'])
 def predict_fits():
-    if model is None: return jsonify({'error': 'Modelo no disponible.'}), 500
+    if model is None: return jsonify({'error': 'Model not available'}), 500
     file = request.files.get('file')
-    if not file or not file.filename.lower().endswith('.fits'): return jsonify({'error': 'Sube un archivo .fits válido.'}), 400
+    if not file or not file.filename.lower().endswith('.fits'): return jsonify({'error': 'Upload a valid .fits file.'}), 400
     
     temp_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename))
     try:
@@ -110,11 +110,11 @@ def predict_fits():
         results = hunt_and_predict(lc)
         
         if not results:
-            return jsonify({'error': 'El algoritmo BLS no pudo encontrar ningún pico de periodo. La curva de luz puede ser demasiado corta o ruidosa.'}), 404
+            return jsonify({'error': 'The BLS algorithm could not find any period dip. The light curve may be too short or noisy.'}), 404
 
-        return jsonify({'results': results, 'source': f'Archivo: {file.filename}'})
+        return jsonify({'results': results, 'source': f'File: {file.filename}'})
     except Exception as e:
-        return jsonify({'error': f'Error fatal procesando el archivo: {str(e)}'}), 500
+        return jsonify({'error': f'Fatal error processing file: {str(e)}'}), 500
     finally:
         if os.path.exists(temp_path):
             os.remove(temp_path)
