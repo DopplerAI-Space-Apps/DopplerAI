@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting closer to New Horizons</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <header class="header">
+        <img src="logo.png" alt="">
+        <h1>Getting closer to New Horizons</h1>
+        <p class="subtitle">Sistema de Detección de Exoplanetas - Kepler Object of Interest (KOI)</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Selecciona el origen de datos</h2>
+            <div class="option-selector">
+                <button class="option-btn" id="btnNASA" onclick="selectOption('nasa')">Datos de NASA (KOI)</button>
+                <button class="option-btn" id="btnOwnFile" onclick="selectOption('own')">Archivo Propio (.fits)</button>
+            </div>
+
+            <!-- Opción: Datos de NASA -->
+            <div class="input-section" id="sectionNASA">
+                <form id="formNASA">
+                    <div class="form-group">
+                        <label class="form-label">Kepler ID (KIC/KEPID)</label>
+                        <input type="text" id="keplerId" class="form-input" placeholder="Ej: 11442793">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnAnalyzeNASA">Analizar KOI</button>
+                </form>
+            </div>
+
+            <!-- Opción: Archivo Propio -->
+            <div class="input-section" id="sectionOwnFile">
+                <form id="formOwnFile">
+                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📁</div>
+                        <h3>Selecciona tu archivo .fits</h3>
+                        <p id="fileName" style="margin-top: 1rem; color: var(--accent-color);"></p>
+                        <input type="file" id="fileInput" class="file-input" accept=".fits">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3" id="btnAnalyzeOwnFile">Analizar Archivo .fits</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sección de Resultados -->
+        <div class="card results-section" id="resultsSection">
+            <h2>Resultado del Análisis</h2>
+            <div id="processingDiv" class="processing" style="display: none;">
+                <div class="processing-spinner"></div>
+                <p>Procesando... Esto puede tardar unos momentos.</p>
+            </div>
+            <div id="resultDiv" style="display: none;">
+                <!-- El contenido se generará con JavaScript -->
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- ... (la sección "Result Interpretation" de tu equipo se mantiene igual) ... -->
+        </div>
+    </div>
+    <script src="../static/index.js"></script>
+</body>
+</html>
