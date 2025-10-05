@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             resultsHTML += `
                 <div class="result-box ${resultClass}" style="margin-bottom: 1rem;">
-                    <strong>Candidato #${res.candidate_num}</strong>
+                    <strong>Candidate #${res.candidate_num}</strong>
                     <div class="probability-display" style="font-size: 2rem;">
                         ${res.probability}%
                     </div>
