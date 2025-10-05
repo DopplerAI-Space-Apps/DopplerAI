@@ -6,10 +6,10 @@ import csv
 import glob
 import numpy as np
 
-# --- CONFIGURACIÓN ---
+# --- SETTINGS ---
 INPUT_CSV = './data/cumulative_koi.csv'
 OUTPUT_CSV = './data/processed_lightcurves_FINAL.csv'
-LOCAL_DATA_PATH = './DOWNLOADED_DATA/exoplanetarchive.ipac.caltech.edu'
+LOCAL_DATA_PATH = './DOWNLOADED_DATA/'
 N_BINS = 201
 
 def build_dataset_from_harvest():
@@ -68,7 +68,7 @@ def build_dataset_from_harvest():
     try:
         df_final = pd.read_csv(OUTPUT_CSV)
     except (pd.errors.EmptyDataError, FileNotFoundError):
-        print("No se procesó ninguna curva de luz con éxito.")
+        print("No light curve was successfully processed.")
 
 if __name__ == '__main__':
     build_dataset_from_harvest()
