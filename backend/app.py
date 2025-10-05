@@ -20,7 +20,6 @@ try:
     df_catalog = pd.read_csv('./data/cumulative_koi.csv', comment='#')
     df_catalog['kepid'] = pd.to_numeric(df_catalog['kepid'], errors='coerce').dropna().astype(int)
     df_catalog.set_index('kepid', inplace=True)
-    print("Modelo y catálogo de KOIs cargados.")
 except Exception as e:
     model, df_catalog = None, None
     print(f"CRITICAL ERROR WHEN STARTING UP: {e}")
@@ -120,4 +119,5 @@ def predict_fits():
             os.remove(temp_path)
 
 if __name__ == '__main__':
+
     app.run(debug=True)
