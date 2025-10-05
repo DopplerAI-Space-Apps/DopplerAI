@@ -11,29 +11,29 @@
     <header class="header">
         <img src="{{ url_for('static', filename='logo.png') }}" alt="">
         <h1>Getting closer to New Horizons</h1>
-        <p class="subtitle">Sistema de Detección de Exoplanetas - Kepler Object of Interest (KOI)</p>
+        <p class="subtitle">Exoplanet Detection system - Kepler Object of Interest (KOI)</p>
     </header>
 
     <div class="container">
         <div class="card">
-            <h2>Selecciona el origen de datos</h2>
+            <h2>Select the data origin</h2>
             <div class="option-selector">
-                <button class="option-btn" id="btnNASA" onclick="selectOption('nasa')">Datos de NASA (KOI)</button>
-                <button class="option-btn" id="btnOwnFile" onclick="selectOption('own')">Archivo Propio (.fits)</button>
+                <button class="option-btn" id="btnNASA" onclick="selectOption('nasa')">Nasa Data(KOI)</button>
+                <button class="option-btn" id="btnOwnFile" onclick="selectOption('own')">Own file (.fits)</button>
             </div>
 
-            <!-- Opción: Datos de NASA -->
+            <!-- Option: Nasa Data -->
             <div class="input-section" id="sectionNASA">
                 <form id="formNASA">
                     <div class="form-group">
                         <label class="form-label">Kepler ID (KIC/KEPID)</label>
                         <input type="text" id="keplerId" class="form-input" placeholder="Ej: 11442793">
                     </div>
-                    <button type="submit" class="btn btn-primary" id="btnAnalyzeNASA">Analizar KOI</button>
+                    <button type="submit" class="btn btn-primary" id="btnAnalyzeNASA">Analize KOI</button>
                 </form>
             </div>
 
-            <!-- Opción: Archivo Propio -->
+            <!-- Option: Own Archive -->
             <div class="input-section" id="sectionOwnFile">
                 <form id="formOwnFile">
                     <div class="upload-area" onclick="document.getElementById('fileInput').click()">
@@ -42,20 +42,20 @@
                         <p id="fileName" style="margin-top: 1rem; color: var(--accent-color);"></p>
                         <input type="file" id="fileInput" class="file-input" accept=".fits">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3" id="btnAnalyzeOwnFile">Analizar Archivo .fits</button>
+                    <button type="submit" class="btn btn-primary mt-3" id="btnAnalyzeOwnFile">Analyze .fits file</button>
                 </form>
             </div>
         </div>
 
-        <!-- Sección de Resultados -->
+        <!-- Results Section -->
         <div class="card results-section" id="resultsSection">
-            <h2>Resultado del Análisis</h2>
+            <h2>Analysis Result</h2>
             <div id="processingDiv" class="processing" style="display: none;">
                 <div class="processing-spinner"></div>
-                <p>Procesando... Esto puede tardar unos momentos.</p>
+                <p>Processing... This may took a while.</p>
             </div>
             <div id="resultDiv" style="display: none;">
-                <!-- El contenido se generará con JavaScript -->
+                <!-- The content is generated with JavaScript -->
             </div>
         </div>
     </div>
