@@ -4,13 +4,13 @@ automatic_scaling:
   min_instances: 0
   max_instances: 3
 
-entrypoint: gunicorn --workers=1 --threads=8 --timeout=0 -b :$PORT backend.app:app
+entrypoint: gunicorn --workers=1 --threads=8 --timeout=0 -b :$PORT app:app
 
 handlers:
 
 - url: /static
-  static_dir: frontend/static
+    static_dir: frontend/static
 
 - url: /.*
-  script: auto
-  secure: always # Redirige todo a HTTPS
+    script: backend/app.py
+    secure: always
