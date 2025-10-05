@@ -20,7 +20,10 @@ def purge_all_caches():
 purge_all_caches()
 # -----------------------------------------
 
-app = Flask(__name__)
+app = Flask(
+    __name__, 
+    template_folder='../frontend/templates',
+    static_folder='../frontend/static')
 app.secret_key = 'la-redencion-final-te-lo-juro'
 
 try:

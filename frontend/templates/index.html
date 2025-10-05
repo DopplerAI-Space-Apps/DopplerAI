@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Getting closer to New Horizons</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header class="header">
-        <img src="logo.png" alt="">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="">
         <h1>Getting closer to New Horizons</h1>
         <p class="subtitle">Sistema de Detección de Exoplanetas - Kepler Object of Interest (KOI)</p>
     </header>
@@ -57,11 +57,7 @@
                 <!-- El contenido se generará con JavaScript -->
             </div>
         </div>
-
-        <div class="card">
-            <!-- ... (la sección "Result Interpretation" de tu equipo se mantiene igual) ... -->
-        </div>
     </div>
-    <script src="../static/index.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>
