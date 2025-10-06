@@ -6,7 +6,6 @@ __pycache__/
 # Dataset
 /DOWNLOADED_DATA/
 /backend/data/processed_lightcurves_FINAL.csv
-/backend/uploads/
 
 # Construction scripts
 /backend/01_build_dataset_from_local.py
