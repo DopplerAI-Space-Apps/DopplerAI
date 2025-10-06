@@ -11,7 +11,7 @@ import shutil
 app = Flask(__name__, template_folder='../frontend/templates',
     static_folder='../frontend/static')
 app.secret_key = 'we-will-win'
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # --- RESOURCE LOADING ---
@@ -121,3 +121,4 @@ def predict_fits():
 if __name__ == '__main__':
 
     app.run(debug=True)
+
