@@ -1,4 +1,4 @@
-<img width="762" height="216" alt="DopplerAI-removebg-preview (1)" src="https://raw.githubusercontent.com/DopplerAI-Space-Apps/DopplerAI/refs/heads/main/frontend/templates/logo.png">
+<img width="762" height="216" alt="logo" src="https://github.com/user-attachments/assets/3cf49bb6-d34b-4209-895f-ca37d90a2562" />
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-Web%20Framework-lightgrey.svg)](https://flask.palletsprojects.com/)
