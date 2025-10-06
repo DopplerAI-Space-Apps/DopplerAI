@@ -9,7 +9,7 @@ This project was developed as part of the NASA Space Apps Challenge 2025.
 
 If you just want to try the solution [click here](https://propane-library-474000-v6.uc.r.appspot.com/)
 
-![test](https://github.com/user-attachments/assets/0132cde8-74cb-48a5-ba6a-c70d2d1058c2)
+![test](https://github.com/user-attachments/assets/27190332-ca52-40ab-8da8-d91201f9c431)
 
 ---
 
